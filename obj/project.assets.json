@@ -3834,11 +3834,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Valentine\\source\\repos\\AdonisAPI\\AdonisAPI.csproj",
+      "projectUniqueName": "C:\\Users\\Valentine\\RiderProjects\\AdonisAPI\\AdonisAPI.csproj",
       "projectName": "AdonisAPI",
-      "projectPath": "C:\\Users\\Valentine\\source\\repos\\AdonisAPI\\AdonisAPI.csproj",
+      "projectPath": "C:\\Users\\Valentine\\RiderProjects\\AdonisAPI\\AdonisAPI.csproj",
       "packagesPath": "C:\\Users\\Valentine\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Valentine\\source\\repos\\AdonisAPI\\obj\\",
+      "outputPath": "C:\\Users\\Valentine\\RiderProjects\\AdonisAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -3871,7 +3871,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.100"
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net6.0": {
@@ -3961,7 +3961,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.308\\RuntimeIdentifierGraph.json"
       }
     }
   }

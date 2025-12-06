@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AdonisAPI.Services;
 
-public class ApplicationDbContext:IdentityDbContext<GymBro>
+public class ApplicationDbContext:IdentityDbContext<CreamUser>
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
@@ -14,24 +14,24 @@ public class ApplicationDbContext:IdentityDbContext<GymBro>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder); // Required for Identity tables
-        modelBuilder.Entity<GymBro>().ToTable("GymBro"); // Renaming AspNetUsers to Users
+        modelBuilder.Entity<CreamUser>().ToTable("CreamUser"); // Renaming AspNetUsers to Users
         modelBuilder.Entity<IdentityRole>().ToTable("Roles");
         modelBuilder.Entity<IdentityUserRole<string>>().ToTable("UserRoles");
 
        modelBuilder.Entity<Favourite>()
-            .HasOne(f => f.GymBro)
+            .HasOne(f => f.CreamUser)
             .WithMany()
-            .HasForeignKey(f => f.UserId)
-            .OnDelete(DeleteBehavior.Cascade); // Delete favorites if user is deleted
+            .HasForeignKey(f => f.CreamUserId)
+            .OnDelete(DeleteBehavior.Cascade);  
 
         modelBuilder.Entity<Favourite>()
-            .HasOne(f => f.Exercise)
+            .HasOne(f => f.Product)
             .WithMany()
-            .HasForeignKey(f => f.ExerciseId)
+            .HasForeignKey(f => f.ProductId)
             .OnDelete(DeleteBehavior.Cascade);
 
     }
    
-    public DbSet<Exercise> Exercises { get; set; }
+    public DbSet<Product> Products { get; set; }
     public DbSet<Favourite> Favorites { get; set; }
 }

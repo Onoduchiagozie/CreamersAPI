@@ -11,10 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 
-var jwtKey = builder.Configuration["Jwt:Key"] ?? throw new ArgumentNullException("Jwt:Key is missing in appsettings.json");
-var jwtIssuer = builder.Configuration["Jwt:Issuer"] ?? "https://yourdomain.com"; // Change to your domain
-var jwtAudience = builder.Configuration["Jwt:Audience"] ?? "https://yourclient.com"; // Change to your client app
-
+ 
 
 
 // Configure services
@@ -24,7 +21,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // builder.Services.AddDefaultIdentity<GymBro>()
 //     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-builder.Services.AddIdentity<GymBro, IdentityRole>()
+builder.Services.AddIdentity<CreamUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddSignInManager()
     .AddDefaultTokenProviders();

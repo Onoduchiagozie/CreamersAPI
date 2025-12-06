@@ -18,10 +18,12 @@ namespace AdonisAPI.Controllers
     public class FavouritesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<GymBro> _userManager;
+        private readonly UserManager<CreamUser> _userManager;
         private readonly ImageDownloadService _imageDownloadService;
 
-        public FavouritesController(ApplicationDbContext context, UserManager<GymBro> userManager, ImageDownloadService imageDownloadService)
+        public FavouritesController(ApplicationDbContext context,
+            UserManager<CreamUser> userManager,
+            ImageDownloadService imageDownloadService)
         {
             _context = context;
             _userManager = userManager;
@@ -30,61 +32,62 @@ namespace AdonisAPI.Controllers
 
         // POST: api/favourites/add
         [HttpPost("AddFavourite")]
-        public async Task<IActionResult> AddFavourite([FromBody] Exercise newExercise)
+        public async Task<IActionResult> AddFavourite([FromBody] Product newExercise)
         {
             var userId = _userManager.GetUserId(User);
   
             if (userId == null) return Unauthorized("User not authenticated.");
 
-            var user = await _userManager.Users.Include(u => u.Favorites)
-                                               .FirstOrDefaultAsync(u => u.Id == userId);
+           var user = await _userManager.Users.Include(u => u.Favorites)
+                                               .FirstOrDefaultAsync(u => u.Id.ToString() == userId);
             if (user == null) return NotFound("User not found.");
 
             // Check if the exercise already exists in the DB
-            var exercise = await _context.Exercises
-                                         .FirstOrDefaultAsync(e => e.Name == newExercise.Name && e.Target == newExercise.Target);
+            var product = await _context.Products
+                                         .FirstOrDefaultAsync(e => e.Name == newExercise.Name
+                                                                   // && e.Target == newExercise.Target
+                                                                   )
+                ;
 
-            if (exercise == null)
+            if (product == null)
             {
                 // If exercise doesn't exist, save it to the database
-                exercise = new Exercise
+                product = new Product
                 {
-                    ExerciseId = newExercise.ExerciseId,
+                    Id = newExercise.Id,
                     Name = newExercise.Name,
-                    BodyPart = newExercise.BodyPart,
-                    Equipment = newExercise.Equipment,
-                    Target = newExercise.Target,
-                    GifUrl = newExercise.GifUrl,
-                    Instructions = newExercise.Instructions,
-                    SecondaryMuscles = newExercise.SecondaryMuscles
+                    Cost = newExercise.Cost,
+                    // Equipment = newExercise.Equipment,
+                    // Target = newExercise.Target,
+             
                 };
 
-                _context.Exercises.Add(exercise);
+                _context.Products.Add(product);
                 await _context.SaveChangesAsync();
             }
 
             // Check if user already favorited this exercise
-            if (user.Favorites.Any(f => f.ExerciseId == exercise.Id))
-                return BadRequest("Exercise is already in favorites.");
+            if (user.Favorites.Any(f => f.ProductId.ToString() == product.Id))
+                return BadRequest("Product is already in favorites.");
 
             // Download and save exercise image locally
             string localImagePath = await _imageDownloadService.DownloadAndSaveGifAsync(
-                exercise.GifUrl, userId, exercise.ExerciseId
+                product.ProductImageBase64, userId, product.Id
             );
             Console.Write(localImagePath);
 
             // Add exercise to user's favorites
             var favourite = new Favourite
             {
-                UserId = userId,
-                ExerciseId = exercise.Id,
-                LocalImagePath = localImagePath
+                CreamUserId = userId,
+                ProductId = product.Id,
+                ImagePath = localImagePath
             };
 
             _context.Favorites.Add(favourite);
             await _context.SaveChangesAsync();
 
-            return Ok(new { Message = "Exercise added to favorites.", ImagePath = localImagePath });
+            return Ok(new { Message = "Product  added to favorites.", ImagePath = localImagePath });
         }
 
         
@@ -96,16 +99,16 @@ namespace AdonisAPI.Controllers
         {
             var userId = _userManager.GetUserId(User);
             if (userId == null) return Unauthorized("User not authenticated.");
-
+            var c = Guid.Parse(exerciseId.ToString());
             var favourite = await _context.Favorites
-                .FirstOrDefaultAsync(f => f.UserId == userId && f.ExerciseId == exerciseId);
+                .FirstOrDefaultAsync(f => f.CreamUserId == userId && f.ProductId == c.ToString());
             if (favourite == null)
                 return NotFound("Favourite not found.");
 
             _context.Favorites.Remove(favourite);
             await _context.SaveChangesAsync();
 
-            return Ok(new { Message = "Exercise removed from favorites." });
+            return Ok(new { Message = "Product removed from favorites." });
         }
 
         // GET: api/favourites
@@ -116,19 +119,18 @@ namespace AdonisAPI.Controllers
             if (userId == null) return Unauthorized("User not authenticated.");
 
             var favouritesData = await _context.Favorites
-                                           .Where(f => f.UserId == userId)
-                                           .Include(f => f.Exercise)
+                                           .Where(f => f.CreamUserId == userId)
+                                           .Include(f => f.Product)
                                            .Select(f => new
                                            {
                                            
-                                               f.Exercise.Name,
-                                               f.Exercise.BodyPart,
-                                               f.Exercise.Equipment,
-                                               f.Exercise.Target,
-                                             f.LocalImagePath,
+                                               f.Product.Name,
+                                               f.Product.Cost,
+                                               f.Product.ProductImageBase64,
+                              
                                              //  LocalImagePath = _imageDownloadService.GetLocalImagePath(userId, f.Exercise.Id.ToString()),
-                                               Instructions = f.Exercise.Instructions,
-                                               SecondaryMuscles = f.Exercise.SecondaryMuscles
+                                               // Instructions = f.Exercise.Instructions,
+                                               // SecondaryMuscles = f.Exercise.SecondaryMuscles
                                            })
                                            .ToListAsync();
 
@@ -138,12 +140,13 @@ namespace AdonisAPI.Controllers
             var favourites = favouritesData.Select(f => new
             {
                 f.Name,
-                f.BodyPart,
-                f.Equipment,
-                f.Target,
-                LocalImagePath = $"http://192.168.100.67:5151/StoredImages/{f.LocalImagePath}",
-                f.Instructions,
-                f.SecondaryMuscles
+                f.Cost
+                // f.BodyPart,
+                // f.Equipment,
+                // f.Target,
+                // LocalImagePath = $"http://192.168.100.67:5151/StoredImages/{f.LocalImagePath}",
+                // f.Instructions,
+                // f.SecondaryMuscles
             }).ToList();
             return Ok(favourites);
         }
