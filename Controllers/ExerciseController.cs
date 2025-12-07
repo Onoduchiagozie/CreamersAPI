@@ -31,66 +31,7 @@ namespace AdonisAPI.Controllers
         }
 
         // POST: api/favourites/add
-        [HttpPost("AddFavourite")]
-        public async Task<IActionResult> AddFavourite([FromBody] Product newExercise)
-        {
-            var userId = _userManager.GetUserId(User);
   
-            if (userId == null) return Unauthorized("User not authenticated.");
-
-           var user = await _userManager.Users.Include(u => u.Favorites)
-                                               .FirstOrDefaultAsync(u => u.Id.ToString() == userId);
-            if (user == null) return NotFound("User not found.");
-
-            // Check if the exercise already exists in the DB
-            var product = await _context.Products
-                                         .FirstOrDefaultAsync(e => e.Name == newExercise.Name
-                                                                   // && e.Target == newExercise.Target
-                                                                   )
-                ;
-
-            if (product == null)
-            {
-                // If exercise doesn't exist, save it to the database
-                product = new Product
-                {
-                    Id = newExercise.Id,
-                    Name = newExercise.Name,
-                    Cost = newExercise.Cost,
-                    // Equipment = newExercise.Equipment,
-                    // Target = newExercise.Target,
-             
-                };
-
-                _context.Products.Add(product);
-                await _context.SaveChangesAsync();
-            }
-
-            // Check if user already favorited this exercise
-            if (user.Favorites.Any(f => f.ProductId.ToString() == product.Id))
-                return BadRequest("Product is already in favorites.");
-
-            // Download and save exercise image locally
-            string localImagePath = await _imageDownloadService.DownloadAndSaveGifAsync(
-                product.ProductImageBase64, userId, product.Id
-            );
-            Console.Write(localImagePath);
-
-            // Add exercise to user's favorites
-            var favourite = new Favourite
-            {
-                CreamUserId = userId,
-                ProductId = product.Id,
-                ImagePath = localImagePath
-            };
-
-            _context.Favorites.Add(favourite);
-            await _context.SaveChangesAsync();
-
-            return Ok(new { Message = "Product  added to favorites.", ImagePath = localImagePath });
-        }
-
-        
         
         
         // DELETE: api/favourites/delete/{exerciseId}

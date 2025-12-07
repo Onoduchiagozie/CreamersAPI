@@ -11,7 +11,10 @@ public class CreamUser:IdentityUser
     public bool IsSubscribed { get; set; }
 
     public bool IsSeller { get; set; }
+    
+    public ICollection<Product> Inventory { get; set; }
+    public ICollection<Favourite> Favourites { get; set; }
 
-    public ICollection<Favourite> Favorites { get; set; } = new List<Favourite>();
+
     // Navigation property for the user's favorites
  }

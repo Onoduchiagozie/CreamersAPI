@@ -43,7 +43,7 @@ public class AuthController : ControllerBase
 
         if (result.Succeeded)
         {
-            return Ok("User created successfully.");
+            return Ok();
         }
         else
         {
@@ -75,8 +75,8 @@ public class AuthController : ControllerBase
             {
               
                 new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.Role, user.Id.ToString()),
-                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(ClaimTypes.NameIdentifier, user.Id),
+                 new Claim(ClaimTypes.Name, user.UserName),
              }),
             Expires = DateTime.UtcNow.AddHours(7),
          //   NotBefore = DateTime.UtcNow.AddHours(-2),
