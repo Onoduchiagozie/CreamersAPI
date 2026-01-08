@@ -9,26 +9,19 @@ using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
-
- 
-
-
 // Configure services
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// builder.Services.AddDefaultIdentity<GymBro>()
-//     .AddEntityFrameworkStores<ApplicationDbContext>();
-
+ 
 builder.Services.AddIdentity<CreamUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddSignInManager()
     .AddDefaultTokenProviders();
 
-builder.Services.AddHttpClient<ImageDownloadService>();
+// builder.Services.AddHttpClient<ImageDownloadService>();
 
-
+builder.Services.AddScoped<OrderService>();
 
 builder.Services.AddAuthentication(options =>
     {
@@ -54,7 +47,7 @@ builder.Services.AddAuthentication(options =>
 
 
 builder.Services.AddAuthorization();
-builder.Services.AddHttpClient<ImageDownloadService>();
+// builder.Services.AddHttpClient<ImageDownloadService>();
 
 
 builder.Services.AddCors(options =>
@@ -67,6 +60,8 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.AddHttpClient();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

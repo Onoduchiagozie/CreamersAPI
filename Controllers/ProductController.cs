@@ -69,10 +69,16 @@ public class ProductController:ControllerBase
     }
 
 
-    
-    
-    
- 
+    // [HttpGet("GetAllProductswithoption")]
+    // public async Task<IActionResult> GetAllProductsWithOptions(string id){
+    //     var product = await _context.Products
+    //         .Include(p => p.CustomizationGroups)
+    //         .ThenInclude(g => g.Options)
+    //         .FirstOrDefaultAsync(p => p.Id == id);
+    //     return Ok(product);
+    //
+    // }
+
     [Authorize]  
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteProduct(string? id)
@@ -91,20 +97,38 @@ public class ProductController:ControllerBase
         return Ok(new { message = "Product deleted successfully" });
     }
 
-    
+
     [HttpGet("GetAllProducts")]
     public async Task<IActionResult> GetAllProducts()
     {
         var request = HttpContext.Request; // Access via a controller property or injected IHttpContextAccessor
         var baseUrl = $"{request.Scheme}://{request.Host}{request.PathBase}";
-        var products = await _context.Products
+        var products = await _context
+            .Products
             .Select(p => new
-            {p.Id,
+            {
+                p.Id,
                  p.Name,
                 p.Cost,
                 rating=23,
+                p.Category,
                 description=p.Description,
-                 ImageUrl = $"{baseUrl}{p.ProductImageBase64}" // contains "/uploads/xxx.jpg"
+                 ImageUrl = $"{baseUrl}{p.ProductImageBase64}", // contains "/uploads/xxx.jpg"
+                 Customizations = p.CustomizationGroups
+                 .OrderBy(g => g.SortOrder)
+                 .Select(g => new
+                 {
+                 g.Id,
+                 g.Name,               // Sweetness, Flavour, Toppings
+                 g.IsRequired,
+                 g.MaxSelections,
+                 Options = g.Options.Select(o => new
+                 {
+                     o.Id,
+                     o.Name,
+                     o.PriceIncrement
+                 })
+            })
             })
             .ToListAsync();
 
@@ -192,6 +216,30 @@ public class ProductController:ControllerBase
                 intake.Description = newProduct.Description;
                 intake.ProductImageBase64 = newProduct.ProductImageBase64;
                 intake.SellerId = user.Id;
+                intake.CustomizationGroups = new List<TreatCustomizationGroup>();
+                
+                
+                
+                if (newProduct.Customizations != null)
+                {
+                    foreach (var group in newProduct.Customizations)
+                    {
+                        var cg = new TreatCustomizationGroup
+                        {
+                            Name = group.Name,
+                            IsRequired = group.IsRequired,
+                            MaxSelections = group.MaxSelections,
+                            Options = group.Options.Select(o => 
+                                new TreatCustomizationOptions
+                            {
+                                Name = o.Name,
+                                PriceIncrement = o.PriceIncrement
+                            }).ToList()
+                        };
+                        intake.CustomizationGroups.Add(cg);
+                    }
+                }
+
             }
             catch(Exception e)
             {

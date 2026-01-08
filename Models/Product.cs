@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-
-namespace AdonisAPI.Models
+ namespace AdonisAPI.Models
 {
 
     public class Product
@@ -15,6 +14,7 @@ namespace AdonisAPI.Models
         public string Name { get; set; } // Required
 
          public int? Cost { get; set; } // Optional
+         public string Category { get; set; } // Optional
         public string? Location { get; set; } // Optional
          public string? Description { get; set; } // Optional
         public string? SellerId { get; set; } // Optional
@@ -22,6 +22,8 @@ namespace AdonisAPI.Models
         // Navigation property
         public CreamUser Seller { get; set; }
         public ICollection<Favourite> FavouritedBy { get; set; }
+        public ICollection<TreatCustomizationGroup> CustomizationGroups { get; set; } = new List<TreatCustomizationGroup>();
+
 
     }
    

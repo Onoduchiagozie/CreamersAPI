@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "+GnfdI/X/Ps=",
+  "dgSpecHash": "kbV4c88ij3c=",
   "success": true,
   "projectFilePath": "C:\\Users\\Valentine\\RiderProjects\\AdonisAPI\\AdonisAPI.csproj",
   "expectedPackageFiles": [
@@ -34,6 +34,7 @@
     "C:\\Users\\Valentine\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\Valentine\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\6.0.0\\microsoft.extensions.fileproviders.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\Valentine\\.nuget\\packages\\microsoft.extensions.fileproviders.embedded\\6.0.0\\microsoft.extensions.fileproviders.embedded.6.0.0.nupkg.sha512",
+    "C:\\Users\\Valentine\\.nuget\\packages\\microsoft.extensions.http\\6.0.0\\microsoft.extensions.http.6.0.0.nupkg.sha512",
     "C:\\Users\\Valentine\\.nuget\\packages\\microsoft.extensions.identity.core\\6.0.0\\microsoft.extensions.identity.core.6.0.0.nupkg.sha512",
     "C:\\Users\\Valentine\\.nuget\\packages\\microsoft.extensions.identity.stores\\6.0.0\\microsoft.extensions.identity.stores.6.0.0.nupkg.sha512",
     "C:\\Users\\Valentine\\.nuget\\packages\\microsoft.extensions.logging\\6.0.0\\microsoft.extensions.logging.6.0.0.nupkg.sha512",

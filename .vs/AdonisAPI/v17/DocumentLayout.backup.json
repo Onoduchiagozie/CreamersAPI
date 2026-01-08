@@ -11,10 +11,6 @@
       "RelativeMoniker": "D:0:0:{858A19F3-0761-4357-BB52-ADF703F4D6CA}|AdonisAPI.csproj|solutionrelative:adonisapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{858A19F3-0761-4357-BB52-ADF703F4D6CA}|AdonisAPI.csproj|c:\\users\\valentine\\source\\repos\\adonisapi\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{858A19F3-0761-4357-BB52-ADF703F4D6CA}|AdonisAPI.csproj|solutionrelative:controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{858A19F3-0761-4357-BB52-ADF703F4D6CA}|AdonisAPI.csproj|c:\\users\\valentine\\source\\repos\\adonisapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{858A19F3-0761-4357-BB52-ADF703F4D6CA}|AdonisAPI.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -25,6 +21,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{858A19F3-0761-4357-BB52-ADF703F4D6CA}|AdonisAPI.csproj|c:\\users\\valentine\\source\\repos\\adonisapi\\adonisapi.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
       "RelativeMoniker": "D:0:0:{858A19F3-0761-4357-BB52-ADF703F4D6CA}|AdonisAPI.csproj|solutionrelative:adonisapi.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Valentine\\source\\repos\\AdonisAPI\\Controllers\\WeatherForecastController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Controllers\\WeatherForecastController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,8 +34,12 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -44,7 +48,7 @@
               "RelativeDocumentMoniker": "Models\\Exercise.cs",
               "ToolTip": "C:\\Users\\Valentine\\source\\repos\\AdonisAPI\\Models\\Exercise.cs",
               "RelativeToolTip": "Models\\Exercise.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABsAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-30T14:46:35.304Z",
               "EditorCaption": ""
@@ -52,23 +56,18 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "AdonisAPI",
+              "Title": "AdonisAPI.csproj",
               "DocumentMoniker": "C:\\Users\\Valentine\\source\\repos\\AdonisAPI\\AdonisAPI.csproj",
               "RelativeDocumentMoniker": "AdonisAPI.csproj",
               "ToolTip": "C:\\Users\\Valentine\\source\\repos\\AdonisAPI\\AdonisAPI.csproj",
               "RelativeToolTip": "AdonisAPI.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-01-30T14:45:53.045Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+              "WhenOpened": "2025-01-30T14:45:53.045Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "WeatherForecastController.cs",
               "DocumentMoniker": "C:\\Users\\Valentine\\source\\repos\\AdonisAPI\\Controllers\\WeatherForecastController.cs",
               "RelativeDocumentMoniker": "Controllers\\WeatherForecastController.cs",
@@ -76,12 +75,11 @@
               "RelativeToolTip": "Controllers\\WeatherForecastController.cs",
               "ViewState": "AgIAAAsAAAAAAAAAAAAAwBgAAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-30T07:03:50.494Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-30T07:03:50.494Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\Valentine\\source\\repos\\AdonisAPI\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "Properties\\launchSettings.json",
@@ -89,24 +87,22 @@
               "RelativeToolTip": "Properties\\launchSettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-01-30T06:18:15.915Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-30T06:18:15.915Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "AdonisAPI",
               "DocumentMoniker": "C:\\Users\\Valentine\\source\\repos\\AdonisAPI\\AdonisAPI.csproj",
               "RelativeDocumentMoniker": "AdonisAPI.csproj",
               "ToolTip": "C:\\Users\\Valentine\\source\\repos\\AdonisAPI\\AdonisAPI.csproj",
               "RelativeToolTip": "AdonisAPI.csproj",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-01-30T06:18:13.61Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-30T06:18:13.61Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Valentine\\source\\repos\\AdonisAPI\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -114,8 +110,7 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-19T17:38:25.983Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-19T17:38:25.983Z"
             }
           ]
         }

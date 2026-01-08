@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AdonisAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+781932bfb2cc9cc859ca9807b6f526eabc8fff76")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a8cd9de118a4cff541546277055b4ebe97525180")]
 [assembly: System.Reflection.AssemblyProductAttribute("AdonisAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AdonisAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
