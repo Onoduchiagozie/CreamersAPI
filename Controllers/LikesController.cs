@@ -53,25 +53,23 @@ namespace AdonisAPI.Controllers
         }
 
         // GET: api/favourites
-        [HttpGet("GetUserFavourites")]
+        [HttpGet]
         public async Task<IActionResult> GetUserFavourites()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null) return Unauthorized("User not authenticated.");
+            var request = HttpContext.Request; // Access via a controller property or injected IHttpContextAccessor
+            var baseUrl = $"{request.Scheme}://{request.Host}{request.PathBase}";
 
             var favouritesData = await _context.Favorites
                                            .Where(f => f.CreamUserId == userId)
                                            .Include(f => f.Product)
                                            .Select(f => new
                                            {
-                                           
-                                               f.Product.Name,
-                                               f.Product.Cost,
-                                               f.Product.ProductImageBase64,
-                              
-                                             //  LocalImagePath = _imageDownloadService.GetLocalImagePath(userId, f.Exercise.Id.ToString()),
-                                               // Instructions = f.Exercise.Instructions,
-                                               // SecondaryMuscles = f.Exercise.SecondaryMuscles
+                                               Name=f.Product.Name,
+                                              Price= f.Product.Cost,
+                                               Image = $"{baseUrl}{f.Product.ProductImageBase64}",
+                               
                                            })
                                            .ToListAsync();
 
@@ -81,13 +79,9 @@ namespace AdonisAPI.Controllers
             var favourites = favouritesData.Select(f => new
             {
                 f.Name,
-                f.Cost
-                // f.BodyPart,
-                // f.Equipment,
-                // f.Target,
-                // LocalImagePath = $"http://192.168.100.67:5151/StoredImages/{f.LocalImagePath}",
-                // f.Instructions,
-                // f.SecondaryMuscles
+                f.Price,
+                f.Image
+   
             }).ToList();
             return Ok(favourites);
         }

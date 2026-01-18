@@ -94,18 +94,25 @@ builder.Services.AddSwaggerGen(c =>
 
 
 var app = builder.Build();
+app.MapGet("/", () => "API is alive!");
 
 // Configure the HTTP request pipeline
-if (app.Environment.IsDevelopment())
-{
+ 
     app.UseSwagger();
     app.UseSwaggerUI();
 
-}
-app.UseCors("AllowAll"); 
+ 
+app.UseCors("AllowAll");
 
 var storedImagesPath = Path.Combine(Directory.GetCurrentDirectory(), "StoredImages");
-app.UseStaticFiles(new StaticFileOptions {
+
+ if (!Directory.Exists(storedImagesPath))
+{
+    Directory.CreateDirectory(storedImagesPath);
+}
+
+app.UseStaticFiles(new StaticFileOptions
+{
     FileProvider = new PhysicalFileProvider(storedImagesPath),
     RequestPath = "/StoredImages"
 });

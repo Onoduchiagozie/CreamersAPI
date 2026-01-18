@@ -69,16 +69,7 @@ public class ProductController:ControllerBase
     }
 
 
-    // [HttpGet("GetAllProductswithoption")]
-    // public async Task<IActionResult> GetAllProductsWithOptions(string id){
-    //     var product = await _context.Products
-    //         .Include(p => p.CustomizationGroups)
-    //         .ThenInclude(g => g.Options)
-    //         .FirstOrDefaultAsync(p => p.Id == id);
-    //     return Ok(product);
-    //
-    // }
-
+ 
     [Authorize]  
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteProduct(string? id)
@@ -220,25 +211,25 @@ public class ProductController:ControllerBase
                 
                 
                 
-                if (newProduct.Customizations != null)
-                {
-                    foreach (var group in newProduct.Customizations)
-                    {
-                        var cg = new TreatCustomizationGroup
-                        {
-                            Name = group.Name,
-                            IsRequired = group.IsRequired,
-                            MaxSelections = group.MaxSelections,
-                            Options = group.Options.Select(o => 
-                                new TreatCustomizationOptions
-                            {
-                                Name = o.Name,
-                                PriceIncrement = o.PriceIncrement
-                            }).ToList()
-                        };
-                        intake.CustomizationGroups.Add(cg);
-                    }
-                }
+                // if (newProduct.Customizations != null)
+                // {
+                //     foreach (var group in newProduct.Customizations)
+                //     {
+                //         var cg = new TreatCustomizationGroup
+                //         {
+                //             Name = group.Name,
+                //             IsRequired = group.IsRequired,
+                //             MaxSelections = group.MaxSelections,
+                //             Options = group.Options.Select(o => 
+                //                 new TreatCustomizationOptions
+                //             {
+                //                 Name = o.Name,
+                //                 PriceIncrement = o.PriceIncrement
+                //             }).ToList()
+                //         };
+                //         intake.CustomizationGroups.Add(cg);
+                //     }
+                // }
 
             }
             catch(Exception e)

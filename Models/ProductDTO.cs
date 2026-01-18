@@ -9,7 +9,7 @@ public class ProductDTO
 
         public string ProductImageBase64 { get; set; }
         
-        public List<CreateCustomizationGroupDto> Customizations { get; set; }= new();
+        // public List<CreateCustomizationGroupDto> Customizations { get; set; }= new();
 }
 
 public class CreateCustomizationGroupDto
